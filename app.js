@@ -23,7 +23,7 @@ app.get('/instruments', async (req, res, next) => {
 
 // STEP 2: Implement named scopes to their respective routes
 app.get('/instruments/keyboard', async (req, res, next) => {
-    const keyboards = await Instrument.findAll()
+    const keyboards = await Instrument.scope({method: ["chooseType", "keyboard"] }).findAll()
     res.json(keyboards);
 });
 

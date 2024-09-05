@@ -21,6 +21,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Instrument',
+    scopes: {
+      chooseType(typeInput) {
+        return {where: {
+          type: typeInput
+        }
+        }
+      }
+    }
   });
   return Instrument;
 };
