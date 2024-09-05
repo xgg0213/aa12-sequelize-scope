@@ -21,11 +21,26 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Instrument',
+    defaultScope: {
+      attributes: {
+        exclude: ["createdAt", "updatedAt"]
+      }
+    },
     scopes: {
       chooseType(typeInput) {
         return {where: {
           type: typeInput
         }
+        }
+      },
+      chooseStore(storeId) {
+        return {
+          where: {
+            storeId
+          },
+          include: [{
+            model: sequelize.models.Store
+          }]
         }
       }
     }
